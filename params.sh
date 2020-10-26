@@ -1,9 +1,10 @@
 # params.sh
 #
-CLOUDERA_WEBSITE_PATH=https://archive.cloudera.com/p/cdp-pvc/1.0.2-b2/
+# Authentication details from Cloudera CDP license
 USERNAME=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 PASSWORD=xxxxxxxxxxxx
 
+CLOUDERA_WEBSITE_PATH=https://archive.cloudera.com/p/cdp-pvc/1.0.2-b2/
 MANIFEST_FILE=manifest.json
 
 CLOUDERA_REGISTRY_PATH=container.repository.cloudera.com/cdp-private
