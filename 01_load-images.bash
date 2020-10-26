@@ -2,6 +2,9 @@
 
 source params.sh
 
+# download manifest.json from website
+curl -s -u $USERNAME:$PASSWORD -o ${MANIFEST_FILE} ${CLOUDERA_WEBSITE_PATH}/manifest.json
+
 
 # Parse manifest and load associative arrays
 COUNT=0
@@ -38,7 +41,7 @@ do
   if [ ! -f ${FILE_NAME} ]
   then
     echo downloading image tar: ${FILE_NAME} ..
-    curl -s -u $USERNAME:$PASSWORD -o ${FILE_NAME} ${WEBSITE_PATH}/${FILE_NAME}
+    curl -s -u $USERNAME:$PASSWORD -o ${FILE_NAME} ${CLOUDERA_WEBSITE_PATH}/${FILE_NAME}
   fi
 
   if [ ! -f ${FILE_NAME} ]; then echo "File not found!" 
