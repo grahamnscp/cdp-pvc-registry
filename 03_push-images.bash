@@ -18,7 +18,7 @@ do
     echo image already present in registry
   else
     echo pushing image ..
-    docker push $LOCAL_REGISTRY/$IMG
+    docker push $IMG
   fi
 
   echo "--------------------------------------------------------------------------------"
