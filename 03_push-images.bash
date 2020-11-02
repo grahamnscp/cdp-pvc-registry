@@ -2,9 +2,6 @@
 
 source params.sh
 
-LOCAL_REGISTRY=ggate.glocal.lab:5000
-LOCAL_REGISTRY_DIR=cdp-private
-
 # push all tagged images in local daemon to remote registry
 COUNT=0
 for IMG in `docker images | grep ggate | sed 's/ggate.glocal.lab:5000\///' | awk '{printf "%s:%s\n",$1,$2}'`
