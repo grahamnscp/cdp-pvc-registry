@@ -4,7 +4,7 @@ source params.sh
 
 # push all tagged images in local daemon to remote registry
 COUNT=0
-for IMG in `docker images | grep $LOCAL_REGISTRY | sed 's/$LOCAL_REGISTRY\///' | awk '{printf "%s:%s\n",$1,$2}'`
+for IMG in `docker images | grep $LOCAL_REGISTRY | sed "s/$LOCAL_REGISTRY\///" | awk '{printf "%s:%s\n",$1,$2}'`
 do
   COUNT=$(($COUNT+1))
   IMG_PATH=`echo $IMG | awk -F ':' '{print $1}'`
@@ -18,7 +18,7 @@ do
     echo image already present in registry
   else
     echo pushing image ..
-    docker push $IMG
+    docker push $LOCAL_REGISTRY/$IMG
   fi
 
   echo "--------------------------------------------------------------------------------"
