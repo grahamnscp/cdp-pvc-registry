@@ -26,10 +26,12 @@ openssl ecparam -genkey -name secp384r1 -out $CERTSDIR/server.key
 
 ## Generate a Certificate Signing Request for the Server and sign with the Root CA
 ```
-openssl req -new -sha256 -key $CERTSDIR/server.key -subj "/C=UK/ST=London/O=ExampleCo, Inc./CN=registry.example.com" -out $CERTSDIR/server.csr
+openssl req -new -sha256 -key $CERTSDIR/server.key -subj "/C=UK/ST=London/O=Example, Co./CN=registry.example.com" \
+            -out $CERTSDIR/server.csr
 #openssl req -in $CERTSDIR/server.csr -noout -text
 
-openssl x509 -req -in $CERTSDIR/server.csr -CA $CERTSDIR/rootCA.crt -CAkey $CERTSDIR/rootCA.key -CAcreateserial -out $CERTSDIR/server.crt -days 3650 -sha256
+openssl x509 -req -in $CERTSDIR/server.csr -CA $CERTSDIR/rootCA.crt -CAkey $CERTSDIR/rootCA.key -CAcreateserial \
+             -out $CERTSDIR/server.crt -days 3650 -sha256
 
 ```
 
