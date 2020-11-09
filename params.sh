@@ -12,4 +12,5 @@ CLOUDERA_REGISTRY_PATH=container.repository.cloudera.com/cdp-private
 LOCAL_REGISTRY=registry.example.com:5000
 LOCAL_REGISTRY_DIR=cdp-private
 LOCAL_REGISTRY_PATH=$LOCAL_REGISTRY/$LOCAL_REGISTRY_DIR
+LOCAL_REGISTRY_PROTO=https
 

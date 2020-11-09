@@ -4,6 +4,7 @@ source params.sh
 
 # push all tagged images in local daemon to remote registry
 COUNT=0
+
 for IMG in `docker images | grep $LOCAL_REGISTRY | sed "s/$LOCAL_REGISTRY\///" | awk '{printf "%s:%s\n",$1,$2}'`
 do
   COUNT=$(($COUNT+1))
@@ -13,14 +14,24 @@ do
   echo [$COUNT] processing image: $LOCAL_REGISTRY/$IMG_PATH:$IMG_TAG
 
   # check if exists in remote registry before pushing
-  if [ "$(curl --silent -i http://$LOCAL_REGISTRY/v2/$IMG_PATH/manifests/$IMG_TAG | grep "200 OK" 2> /dev/null)" ]
+  if [ "$LOCAL_REGISTRY_PROTO" == "https" ]
   then
-    echo image already present in registry
+    if [ "$(curl --insecure --silent -i https://$LOCAL_REGISTRY/v2/$IMG_PATH/manifests/$IMG_TAG | grep "HTTP/2 200" 2> /dev/null)" ]
+    then
+      echo image already present in registry
+    else
+      echo pushing image ..
+      docker push $LOCAL_REGISTRY/$IMG
+    fi
   else
-    echo pushing image ..
-    docker push $LOCAL_REGISTRY/$IMG
+    if [ "$(curl --silent -i http://$LOCAL_REGISTRY/v2/$IMG_PATH/manifests/$IMG_TAG | grep "200 OK" 2> /dev/null)" ]
+    then
+      echo image already present in registry
+    else
+      echo pushing image ..
+      docker push $LOCAL_REGISTRY/$IMG
+    fi
   fi
 
   echo "--------------------------------------------------------------------------------"
 done
-
