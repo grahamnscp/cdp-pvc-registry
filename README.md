@@ -37,19 +37,22 @@ note: the params.sh:LOCAL_REGISTRY_PROTO=https needs to reflect the registry pro
 
 Script 01_load-images.bash downloads the docker images for CDP PVC from the archive website, not that you need a license key to do this, there is a 60 day trial option.  Update the version as appropriate, this example used 1.0.2-b2 but things are moving very fast.
 
-The script creates a relative subdirectory ./images/ and downloads the images there if a file of the same name doesn't already exist.  If you have a failed download then remove the partially downloaded file and rerun the script.  CDP PVC image tars are around 23GB on disk.
 
-The key file that is used for the content to download is based on the manifest.json file which is curled from $CLOUDERA_WEBSITE_PATH/$MANIFEST_FILE
+The inventory file that is used for the content to download is based on the manifest.json file which is curled from $CLOUDERA_WEBSITE_PATH/$MANIFEST_FILE
 ```
 $ source params.sh
 $ curl -u $USERNAME:$PASSWORD -o manifest.json ${CLOUDERA_WEBSITE_PATH}/${MANIFEST_FILE}
 ```
 
+The script creates a relative subdirectory ./images/ and downloads the images there if a file of the same name doesn't already exist.
+If you have a failed download then remove the partially downloaded file and rerun the script.  
+CDP PVC image tars are around 23GB on disk.
+
 Once an image tar is downloaded it is imported into the local docker daemon if not already there.
 
 This script can be rerun multiple times if necessary to process all the images.
 
-note: I don't hash check the images, you may want to add that if using in production
+note: I don't hash check the downloaded images, you may want to add that if using in production.
 
 
 ## Tag the images for local registry
