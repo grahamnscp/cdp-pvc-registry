@@ -73,7 +73,7 @@ docker rmi registry.example.com:5000/grahamh/hello-docker:latest
 docker rmi grahamh/hello-docker:latest
 
 docker run -it --rm registry.example.com:5000/grahamh/hello-docker:latest
-Unable to find image 'gjump.glocal.lab:5000/grahamh/hello-docker:latest' locally
+Unable to find image 'registry.example.com:5000/grahamh/hello-docker:latest' locally
 latest: Pulling from grahamh/hello-docker
 5087e76690dc: Pull complete
 Digest: sha256:4c31e9319f419b9f4427af3b3bb548ed166409009b880c6860c21652d21d05bc
